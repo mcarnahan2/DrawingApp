@@ -17,15 +17,17 @@ import java.io.FileNotFoundException;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView targetImage;
+    DrawingView drawingView;
     TextView textTargetUri;
+    public static Bitmap bitmap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         textTargetUri = findViewById(R.id.textView);
-        targetImage = findViewById(R.id.imageView2);
+        drawingView = findViewById(R.id.drawingView);
         Button button = findViewById(R.id.picture_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,11 +46,9 @@ public class MainActivity extends AppCompatActivity {
             Uri targetUri = data.getData();
             textTargetUri.setText(targetUri.toString());
 
-            Bitmap bitmap;
-
             try{
                 bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
-                targetImage.setImageBitmap(bitmap);
+
             } catch (FileNotFoundException e){
                 e.printStackTrace();
             }
