@@ -3,6 +3,7 @@ package edu.apsu.drawingapp;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import java.io.FileNotFoundException;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     DrawingView drawingView;
     TextView textTargetUri;
     public static Bitmap bitmap;
+    public static int backgroundColor = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +31,23 @@ public class MainActivity extends AppCompatActivity {
 
         textTargetUri = findViewById(R.id.textView);
         drawingView = findViewById(R.id.drawingView);
-        Button button = findViewById(R.id.picture_button);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button pictureButton = findViewById(R.id.picture_button);
+        pictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, 0);
             }
         });
+
+        Button paintButton = findViewById(R.id.paint_button);
+        paintButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                backgroundColor = Color.BLUE;
+            }
+        });
+
     }
 
     @Override

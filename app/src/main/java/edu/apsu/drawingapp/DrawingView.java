@@ -7,6 +7,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import static edu.apsu.drawingapp.MainActivity.backgroundColor;
+
 public class DrawingView extends View {
     Paint backgroundPaint;
 
@@ -40,6 +42,11 @@ public class DrawingView extends View {
 
         if(MainActivity.bitmap != null) {
             canvas.drawBitmap(MainActivity.bitmap, 0, 0, backgroundPaint);
+            MainActivity.bitmap = null;
+        } else if(MainActivity.backgroundColor == 0) {
+            backgroundPaint.setColor(MainActivity.backgroundColor);
+            canvas.drawPaint(backgroundPaint);
+            MainActivity.backgroundColor = 0;
         } else {
             canvas.drawPaint(backgroundPaint);
         }
