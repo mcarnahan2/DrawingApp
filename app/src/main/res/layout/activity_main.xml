@@ -19,71 +19,88 @@
     <edu.apsu.drawingapp.DrawingView
         android:id="@+id/drawingView"
         android:layout_width="411dp"
-        android:layout_height="528dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="522dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton2"
+        app:layout_constraintBottom_toTopOf="@+id/draw_imageButton2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_chainStyle="spread_inside"
         tools:srcCompat="@tools:sample/backgrounds/scenic[3]" />
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="74dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/circle"
-        tools:layout_editor_absoluteY="599dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="74dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="32dp"
-        app:layout_constraintStart_toEndOf="@+id/imageButton"
-        app:srcCompat="@drawable/paintbrush"
-        tools:layout_editor_absoluteY="599dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="74dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="32dp"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
-        app:srcCompat="@drawable/color"
-        tools:layout_editor_absoluteY="599dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="74dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="8dp"
+    <SeekBar
+        android:id="@+id/seekBar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="9"
+        android:progress="2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/imageButton3"
-        app:srcCompat="@drawable/text"
-        tools:layout_editor_absoluteY="599dp" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/circle_imageButton"
+        android:layout_width="74dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/draw_imageButton2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/drawingView"
+        app:srcCompat="@drawable/circle" />
+
+    <ImageButton
+        android:id="@+id/draw_imageButton2"
+        android:layout_width="74dp"
+        android:layout_height="55dp"
+        app:layout_constraintEnd_toStartOf="@+id/color_imageButton3"
+        app:layout_constraintStart_toEndOf="@+id/circle_imageButton"
+        app:layout_constraintTop_toBottomOf="@+id/drawingView"
+        app:srcCompat="@drawable/paintbrush" />
+
+    <ImageButton
+        android:id="@+id/color_imageButton3"
+        android:layout_width="74dp"
+        android:layout_height="55dp"
+        app:layout_constraintEnd_toStartOf="@+id/text_imageButton4"
+        app:layout_constraintStart_toEndOf="@+id/draw_imageButton2"
+        app:layout_constraintTop_toBottomOf="@+id/drawingView"
+        app:srcCompat="@drawable/color" />
+
+    <ImageButton
+        android:id="@+id/text_imageButton4"
+        android:layout_width="74dp"
+        android:layout_height="55dp"
+        app:layout_constraintEnd_toStartOf="@+id/eraser_imageButton5"
+        app:layout_constraintStart_toEndOf="@+id/color_imageButton3"
+        app:layout_constraintTop_toBottomOf="@+id/drawingView"
+        app:srcCompat="@drawable/text" />
+
+    <ImageButton
+        android:id="@+id/eraser_imageButton5"
+        android:layout_width="74dp"
+        android:layout_height="55dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_imageButton4"
+        app:layout_constraintTop_toBottomOf="@+id/drawingView"
+        app:srcCompat="@drawable/eraser" />
+
+    <ImageButton
+        android:id="@+id/fill_imageButton6"
         android:layout_width="74dp"
         android:layout_height="55dp"
         android:layout_marginStart="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/eraser"
-        tools:layout_editor_absoluteY="681dp" />
+        app:layout_constraintTop_toBottomOf="@+id/circle_imageButton"
+        app:srcCompat="@drawable/fillbucket" />
 
-    <ImageButton
-        android:id="@+id/imageButton6"
+    <Button
+        android:id="@+id/picture_button"
         android:layout_width="74dp"
         android:layout_height="55dp"
-        android:layout_marginStart="32dp"
-        app:layout_constraintStart_toEndOf="@+id/imageButton5"
-        app:srcCompat="@drawable/fillbucket"
-        tools:layout_editor_absoluteY="681dp" />
+        android:text="Picture"
+        app:layout_constraintStart_toEndOf="@+id/fill_imageButton6"
+        app:layout_constraintTop_toBottomOf="@+id/draw_imageButton2" />
 
 
 </android.support.constraint.ConstraintLayout>
