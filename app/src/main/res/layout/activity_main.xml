@@ -19,7 +19,7 @@
     <edu.apsu.drawingapp.DrawingView
         android:id="@+id/drawingView"
         android:layout_width="411dp"
-        android:layout_height="522dp"
+        android:layout_height="437dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/draw_imageButton2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,12 +32,14 @@
         android:id="@+id/seekBar1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:max="9"
         android:progress="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/picture_button" />
 
     <ImageButton
         android:id="@+id/circle_imageButton"
