@@ -87,9 +87,10 @@
         android:id="@+id/fill_imageButton6"
         android:layout_width="74dp"
         android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/circle_imageButton"
-        app:srcCompat="@drawable/fillbucket"
-        tools:layout_editor_absoluteX="8dp" />
+        app:srcCompat="@drawable/fillbucket" />
 
     <Button
         android:id="@+id/picture_button"
