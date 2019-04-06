@@ -27,7 +27,7 @@ public class DrawingView extends View {
 
     private int paintColor = Color.BLACK;
     private static Paint.Style paintStyle = Paint.Style.STROKE;
-    private static int paintWidth = 1;
+    private static int paintWidth = 3;
 
     private Canvas canvas;
     private Canvas cacheCanvas;
@@ -35,20 +35,14 @@ public class DrawingView extends View {
 
     public DrawingView(Context context) {
         super(context);
-        setup(null);
     }
 
     public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setup(attrs);
+
     }
 
-    public DrawingView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        setup(attrs);
-    }
-
-    private void setup(AttributeSet attrs) {
+    private void init() {
         backgroundPaint = new Paint();
         backgroundPaint.setColor(Color.RED);
         backgroundPaint.setStyle(Paint.Style.FILL);
@@ -90,6 +84,7 @@ public class DrawingView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         currentHeight = h;
         currentWidth = w;
+        init();
  }
 
     @Override
@@ -126,7 +121,7 @@ public class DrawingView extends View {
         updatePaint();
     }
 
-    public static final int PEN = 1;
+    public static final int PEN = 3;
     public static final int PAIL = 2;
 
 

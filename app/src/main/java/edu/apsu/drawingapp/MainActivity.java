@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         sbwidth.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                paintWidth = i+1;
+                drawingView.setPaintWidth(i + 3);
             }
 
             @Override
@@ -93,11 +93,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 if (menuItem.getItemId() == R.id.red) {
-                    drawingView.setBackgroundDrawable(new ColorDrawable(
-                            Color.RED));
+                    drawingView.setColor(Color.RED);
                 } else if (menuItem.getItemId() == R.id.blue) {
-                    drawingView.setBackgroundDrawable(new ColorDrawable(
-                            Color.BLUE));
+                    drawingView.setColor(Color.BLUE);
                 }
                 return false;
             }
@@ -124,6 +122,24 @@ public class MainActivity extends AppCompatActivity {
                 drawingView.setStyle(DrawingView.PAIL);
             }
         });
+
+        ImageButton eraserButton = findViewById(R.id.eraser_imageButton5);
+        eraserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawingView.setStyle(DrawingView.PEN);
+                drawingView.setColor(Color.TRANSPARENT);
+                drawingView.setPaintWidth(paintWidth);
+            }
+        });
+
+        /*Button clearButton = findViewById(R.id.clear_button);
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawingView.clearScreen();
+            }
+        });*/
 
     }
 
