@@ -20,8 +20,6 @@
         android:id="@+id/drawingView"
         android:layout_width="411dp"
         android:layout_height="437dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/draw_imageButton2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -39,33 +37,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/picture_button" />
+        app:layout_constraintTop_toBottomOf="@+id/clear_button" />
 
     <ImageButton
         android:id="@+id/circle_imageButton"
         android:layout_width="74dp"
         android:layout_height="55dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/draw_imageButton2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/drawingView"
         app:srcCompat="@drawable/circle" />
 
     <ImageButton
-        android:id="@+id/draw_imageButton2"
+        android:id="@+id/fill_imageButton"
         android:layout_width="74dp"
         android:layout_height="55dp"
-        app:layout_constraintEnd_toStartOf="@+id/color_imageButton3"
-        app:layout_constraintStart_toEndOf="@+id/circle_imageButton"
-        app:layout_constraintTop_toBottomOf="@+id/drawingView"
-        app:srcCompat="@drawable/paintbrush" />
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circle_imageButton"
+        app:srcCompat="@drawable/fillbucket" />
 
     <ImageButton
         android:id="@+id/color_imageButton3"
         android:layout_width="74dp"
         android:layout_height="55dp"
-        app:layout_constraintEnd_toStartOf="@+id/text_imageButton4"
-        app:layout_constraintStart_toEndOf="@+id/draw_imageButton2"
+        app:layout_constraintStart_toEndOf="@+id/circle_imageButton"
         app:layout_constraintTop_toBottomOf="@+id/drawingView"
         app:srcCompat="@drawable/color" />
 
@@ -73,8 +69,7 @@
         android:id="@+id/text_imageButton4"
         android:layout_width="74dp"
         android:layout_height="55dp"
-        app:layout_constraintEnd_toStartOf="@+id/eraser_imageButton5"
-        app:layout_constraintStart_toEndOf="@+id/color_imageButton3"
+        app:layout_constraintStart_toEndOf="@+id/picture_button"
         app:layout_constraintTop_toBottomOf="@+id/drawingView"
         app:srcCompat="@drawable/text" />
 
@@ -82,6 +77,7 @@
         android:id="@+id/eraser_imageButton5"
         android:layout_width="74dp"
         android:layout_height="55dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/text_imageButton4"
         app:layout_constraintTop_toBottomOf="@+id/drawingView"
@@ -91,25 +87,24 @@
         android:id="@+id/fill_imageButton6"
         android:layout_width="74dp"
         android:layout_height="55dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/circle_imageButton"
-        app:srcCompat="@drawable/fillbucket" />
+        app:srcCompat="@drawable/fillbucket"
+        tools:layout_editor_absoluteX="8dp" />
 
     <Button
         android:id="@+id/picture_button"
         android:layout_width="74dp"
         android:layout_height="55dp"
         android:text="Picture"
-        app:layout_constraintStart_toEndOf="@+id/fill_imageButton6"
-        app:layout_constraintTop_toBottomOf="@+id/draw_imageButton2" />
+        app:layout_constraintStart_toEndOf="@+id/color_imageButton3"
+        app:layout_constraintTop_toBottomOf="@+id/drawingView" />
 
     <Button
         android:id="@+id/save_button"
         android:layout_width="74dp"
         android:layout_height="55dp"
         android:text="Save"
-        app:layout_constraintStart_toEndOf="@+id/picture_button"
+        app:layout_constraintStart_toEndOf="@+id/fill_imageButton"
         app:layout_constraintTop_toBottomOf="@+id/color_imageButton3" />
 
     <Button
@@ -118,7 +113,7 @@
         android:layout_height="55dp"
         android:text="Clear"
         app:layout_constraintStart_toEndOf="@+id/save_button"
-        app:layout_constraintTop_toBottomOf="@+id/color_imageButton3" />
+        app:layout_constraintTop_toBottomOf="@+id/picture_button" />
 
 
 </android.support.constraint.ConstraintLayout>

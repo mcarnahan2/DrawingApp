@@ -107,19 +107,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton drawButton = findViewById(R.id.draw_imageButton2);
-        drawButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawingView.setStyle(DrawingView.PEN);
-            }
-        });
-
         ImageButton fillButton = findViewById(R.id.fill_imageButton6);
         fillButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                drawingView.setStyle(DrawingView.PAIL);
+                drawingView.setBackgroundColor(Color.RED);
             }
         });
 
