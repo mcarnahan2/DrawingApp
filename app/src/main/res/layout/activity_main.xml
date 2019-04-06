@@ -104,5 +104,13 @@
         app:layout_constraintStart_toEndOf="@+id/fill_imageButton6"
         app:layout_constraintTop_toBottomOf="@+id/draw_imageButton2" />
 
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="74dp"
+        android:layout_height="55dp"
+        android:text="Save"
+        app:layout_constraintStart_toEndOf="@+id/picture_button"
+        app:layout_constraintTop_toBottomOf="@+id/color_imageButton3" />
+
 
 </android.support.constraint.ConstraintLayout>

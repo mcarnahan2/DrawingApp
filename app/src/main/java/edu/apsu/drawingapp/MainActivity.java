@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 
@@ -69,11 +70,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton fillButton = findViewById(R.id.fill_imageButton6);
-        fillButton.setOnClickListener(new View.OnClickListener() {
+        Button saveButton = findViewById(R.id.save_button);
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                backgroundColor = Color.BLUE;
+                if (SaveImage.saveScreen(drawingView)) {
+                    Toast.makeText(getApplicationContext(), "Save Succesful", Toast.LENGTH_SHORT);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Save Failed", Toast.LENGTH_SHORT);
+
+                }
             }
         });
 
@@ -103,6 +109,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ImageButton drawButton = findViewById(R.id.draw_imageButton2);
+        drawButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawingView.setStyle(DrawingView.PEN);
+            }
+        });
+
+        ImageButton fillButton = findViewById(R.id.fill_imageButton6);
+        fillButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawingView.setStyle(DrawingView.PAIL);
+            }
+        });
+
     }
 
     @Override
@@ -119,9 +141,6 @@ public class MainActivity extends AppCompatActivity {
             } catch (FileNotFoundException e){
                 e.printStackTrace();
             }
-
-
-
         }
     }
 
