@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                     alertDialogRect();
                 } else if (menuItem.getItemId() == R.id.circle) {
                     textTargetUri.setText("Circle");
+                    alertDialogCircle();
                 }
                 return false;
             }
@@ -194,6 +195,15 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         dialog.setView(inflater.inflate(R.layout.rectangle_activity, null));
+
+        AlertDialog alertDialog = dialog.create();
+        alertDialog.show();
+    }
+
+    private void alertDialogCircle() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        dialog.setView(inflater.inflate(R.layout.circle_activity, null));
 
         AlertDialog alertDialog = dialog.create();
         alertDialog.show();

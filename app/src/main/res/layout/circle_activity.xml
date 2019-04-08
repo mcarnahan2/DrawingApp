@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Rectangle Details"
+        android:text="Circle Details"
         android:textColor="#000"
         android:textSize="30sp" />
 
@@ -23,33 +24,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingLeft="20dp"
-            android:text="Width" />
+            android:text="Radius" />
 
         <EditText
-            android:id="@+id/width_editText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="20dp"
-            android:text="Height" />
-
-        <EditText
-            android:id="@+id/height_editText"
+            android:id="@+id/radius_editText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -72,7 +50,7 @@
             android:text="X Location" />
 
         <EditText
-            android:id="@+id/r_x_editText"
+            android:id="@+id/c_x_editText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -95,7 +73,7 @@
             android:text="Y Location" />
 
         <EditText
-            android:id="@+id/r_y_editText"
+            android:id="@+id/c_y_editText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -105,9 +83,9 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/create_rect_button"
+        android:id="@+id/create_circle_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create Rectangle" />
+        android:text="Create Circle" />
 
 </LinearLayout>
