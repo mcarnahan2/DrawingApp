@@ -1,5 +1,7 @@
 package edu.apsu.drawingapp;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,11 +15,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.SubMenu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -38,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     TextView textTargetUri;
     public static Bitmap bitmap;
     public static int backgroundColor = 0;
+    public static int x;
+    public static int y;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,33 @@ public class MainActivity extends AppCompatActivity {
 
         textTargetUri = findViewById(R.id.textView);
         drawingView = findViewById(R.id.drawingView);
+
+        ImageButton shapeButton = findViewById(R.id.shape_imageButton);
+
+        final PopupMenu popupMenuShape = new PopupMenu(getApplicationContext(), shapeButton);
+        final Menu shapeMenu = popupMenuShape.getMenu();
+        popupMenuShape.getMenuInflater().inflate(R.menu.shape_menu, shapeMenu );
+
+        popupMenuShape.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                if (menuItem.getItemId() == R.id.rect) {
+                    textTargetUri.setText("Rectangle");
+                    alertDialogRect();
+                } else if (menuItem.getItemId() == R.id.circle) {
+                    textTargetUri.setText("Circle");
+                }
+                return false;
+            }
+        });
+
+        shapeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupMenuShape.show();
+            }
+        });
+
         sbwidth = findViewById(R.id.seekBar1);
         sbwidth.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -156,4 +190,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void alertDialogRect() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        dialog.setView(inflater.inflate(R.layout.rectangle_activity, null));
+
+        AlertDialog alertDialog = dialog.create();
+        alertDialog.show();
+    }
 }

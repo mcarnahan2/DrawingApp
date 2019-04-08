@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/clear_button" />
 
     <ImageButton
-        android:id="@+id/circle_imageButton"
+        android:id="@+id/shape_imageButton"
         android:layout_width="74dp"
         android:layout_height="55dp"
         android:layout_marginStart="8dp"
@@ -54,14 +54,14 @@
         android:layout_height="55dp"
         android:layout_marginStart="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circle_imageButton"
+        app:layout_constraintTop_toBottomOf="@+id/shape_imageButton"
         app:srcCompat="@drawable/fillbucket" />
 
     <ImageButton
         android:id="@+id/color_imageButton3"
         android:layout_width="74dp"
         android:layout_height="55dp"
-        app:layout_constraintStart_toEndOf="@+id/circle_imageButton"
+        app:layout_constraintStart_toEndOf="@+id/shape_imageButton"
         app:layout_constraintTop_toBottomOf="@+id/drawingView"
         app:srcCompat="@drawable/color" />
 
@@ -89,7 +89,7 @@
         android:layout_height="55dp"
         android:layout_marginStart="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circle_imageButton"
+        app:layout_constraintTop_toBottomOf="@+id/shape_imageButton"
         app:srcCompat="@drawable/fillbucket" />
 
     <Button
