@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -145,6 +147,8 @@ public class MainActivity extends AppCompatActivity {
 
             try{
                 bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                Drawable drawable = new BitmapDrawable(getResources(), bitmap);
+                drawingView.setBackground(drawable);
 
             } catch (FileNotFoundException e){
                 e.printStackTrace();
