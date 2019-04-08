@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -36,6 +39,19 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+
+/*
+    Four additional fields:
+
+    Text- This brings up a text box that asks the user to enter some text.  Then the user clicks on the screen to add the text.
+    We used drawText() to implement this.
+
+    Background fill- Brings up a list of colors for the user to select.  Uses drawPaint
+
+    Clear- clears everything on the screen
+
+*/
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -264,9 +280,12 @@ public class MainActivity extends AppCompatActivity {
         eraserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                drawingView.setStyle(DrawingView.PEN);
-                drawingView.setColor(Color.TRANSPARENT);
-                drawingView.setPaintWidth(paintWidth);
+                DrawingView drawingView = (DrawingView) findViewById(R.id.drawingView);
+                ColorMatrix matrix = new ColorMatrix();
+                matrix.setSaturation(0);
+
+                ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+                drawingView.setBackgroundTintMode(PorterDuff.Mode.DARKEN);
             }
         });
 

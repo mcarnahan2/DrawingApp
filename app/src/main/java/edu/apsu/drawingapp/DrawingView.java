@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
@@ -25,6 +26,7 @@ public class DrawingView extends View {
     Paint rectanglePaint;
     Paint circlePaint;
     Paint textPaint;
+    Paint eraserPaint;
     private Paint paint;
     private Paint BitmapPaint;
     private Path path;
@@ -103,6 +105,15 @@ public class DrawingView extends View {
         float pixelSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spSize, dm);
 
         textPaint.setTextSize(pixelSize);
+
+        eraserPaint = new Paint();
+        eraserPaint.setAlpha(0);
+        eraserPaint.setColor(Color.TRANSPARENT);
+        eraserPaint.setStrokeWidth(2);
+        eraserPaint.setStyle(Paint.Style.FILL);
+        eraserPaint.setMaskFilter(null);
+        eraserPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        eraserPaint.setAntiAlias(true);
     }
 
     private void updatePaint() {
@@ -137,6 +148,10 @@ public class DrawingView extends View {
             MainActivity.backgroundColor = 0;
         } else {
             canvas.drawPaint(backgroundPaint);
+        }
+
+        if(MainActivity.buttonPressed==5){
+            canvas.drawPath(path, eraserPaint);
         }
 
 
