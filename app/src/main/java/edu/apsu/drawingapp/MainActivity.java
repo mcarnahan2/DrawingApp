@@ -45,18 +45,17 @@ public class MainActivity extends AppCompatActivity {
     private View dialogView;
     private SeekBar sbwidth;
     private int paintWidth;
-    TextView textTargetUri;
     public static Bitmap bitmap;
     public static int backgroundColor = 0;
     public static int buttonPressed =0;
     public static String text;
+    String [] colors = {"Red", "Orange", "Yellow", "Green", "Blue",  "Purple", "Black", "White"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textTargetUri = findViewById(R.id.textView);
         drawingView = findViewById(R.id.drawingView);
 
         ImageButton shapeButton = findViewById(R.id.shape_imageButton);
@@ -69,11 +68,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 if (menuItem.getItemId() == R.id.rect) {
-                    textTargetUri.setText("Rectangle");
+                    alertDialogColor();
                     buttonPressed = 2;
                     Log.i("BUTTON", "Button is " + buttonPressed);
                 } else if (menuItem.getItemId() == R.id.circle) {
-                    textTargetUri.setText("Circle");
+                    alertDialogColor();
                     buttonPressed = 3;
                     Log.i("BUTTON", "Button is " + buttonPressed);
                 }
@@ -152,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                // drawingView.setImageURI(savedImageURI);
 
                 // Display saved image url to TextView
-                textTargetUri.setText("Image saved to gallery." + savedImageURL);
+                Log.i("IMAGE", "Image saved to gallery." + savedImageURL);
                /* try {
                     drawingView.setDrawingCacheEnabled(true);
                     Bitmap bitmap = drawingView.getDrawingCache();
@@ -288,7 +287,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK){
             Uri targetUri = data.getData();
-            textTargetUri.setText(targetUri.toString());
 
             try{
                 bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
@@ -327,18 +325,39 @@ public class MainActivity extends AppCompatActivity {
     private void alertDialogColor(){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 
-        dialog.setTitle("Enter Text");
-        dialog.setMessage("Please enter some text:");
+
+        dialog.setTitle("Choose your color:");
+        dialog.setSingleChoiceItems(colors, -1, new DialogInterface.OnClickListener(){
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (i == 0) {
+                    drawingView.setShapeColor(Color.RED);
+                } else if (i == 1) {
+                    drawingView.setShapeColor(getResources().getColor(R.color.orange));
+                } else if(i == 2){
+                    drawingView.setShapeColor(Color.YELLOW);
+                } else if(i == 3){
+                    drawingView.setShapeColor(Color.GREEN);
+                } else if(i == 4){
+                    drawingView.setShapeColor(Color.BLUE);
+                } else if(i == 5){
+                    drawingView.setShapeColor(getResources().getColor(R.color.purple));
+                } else if(i == 6){
+                    drawingView.setShapeColor(Color.BLACK);
+                } else if(i == 7){
+                    drawingView.setShapeColor(Color.WHITE);
+                }
+            }
+        });
 
         final EditText et = new EditText(this);
         dialog.setView(et);
 
-        dialog.setPositiveButton("Place text", new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton("Draw Shape", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                text = et.getText().toString();
-                Log.i("TEXT", "text is :" + text);
-                buttonPressed=4;
+
                 Log.i("BUTTON", "Button is " + buttonPressed);
             }
         });

@@ -50,6 +50,8 @@ public class DrawingView extends View {
     float tBeginX;
     float tBeginY;
 
+    private int shapeColor = Color.BLACK;
+
     private int paintColor = Color.BLACK;
     private static Paint.Style paintStyle = Paint.Style.STROKE;
     private static int paintWidth = 3;
@@ -79,17 +81,18 @@ public class DrawingView extends View {
         path = new Path();
         BitmapPaint = new Paint();
         updatePaint();
+        updateShape();
 
         rectanglePaint = new Paint();
-        rectanglePaint.setColor(Color.BLACK);
+        rectanglePaint.setColor(shapeColor);
         rectanglePaint.setStyle(Paint.Style.FILL);
 
         circlePaint = new Paint();
-        circlePaint.setColor(Color.BLACK);
+        circlePaint.setColor(shapeColor);
         circlePaint.setStyle(Paint.Style.FILL);
 
         textPaint = new Paint();
-        textPaint.setColor(Color.BLACK);
+        textPaint.setColor(shapeColor);
         textPaint.setStyle(Paint.Style.FILL);
 
         textPaint.setAntiAlias(true);
@@ -106,6 +109,17 @@ public class DrawingView extends View {
         paint.setColor(paintColor);
         paint.setStyle(paintStyle);
         paint.setStrokeWidth(paintWidth);
+
+    }
+
+    private void updateShape() {
+        if(MainActivity.buttonPressed==2){
+            rectanglePaint.setColor(shapeColor);
+            rectanglePaint.setStyle(Paint.Style.FILL);
+        } else if (MainActivity.buttonPressed==3){
+            circlePaint.setColor(shapeColor);
+            circlePaint.setStyle(Paint.Style.FILL);
+        }
 
     }
 
@@ -197,6 +211,11 @@ public class DrawingView extends View {
         updatePaint();
     }
 
+
+    public void setShapeColor(int color){
+        shapeColor = color;
+        updateShape();
+    }
 
     public void setPaintWidth(int width){
         paintWidth = width;
