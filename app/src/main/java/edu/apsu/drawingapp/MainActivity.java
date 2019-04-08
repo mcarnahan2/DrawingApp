@@ -44,12 +44,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textTargetUri;
     public static Bitmap bitmap;
     public static int backgroundColor = 0;
-    public static int x=0;
-    public static int y=0;
-    public static int rectWidth=0;
-    public static int rectHeight=0;
-    public static int radius=0;
-    public static int numbersSet=0;
+    public static int buttonPressed=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,13 +65,11 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 if (menuItem.getItemId() == R.id.rect) {
                     textTargetUri.setText("Rectangle");
-                    Log.i("NUMBERS", "Rectangle Details: W= " + rectWidth + " H= " + rectHeight + " X=" + x + " Y=" + y);
-
-                    alertDialogRect();
+                    buttonPressed=2;
 
                 } else if (menuItem.getItemId() == R.id.circle) {
                     textTargetUri.setText("Circle");
-                    alertDialogCircle();
+                    buttonPressed=3;
                 }
                 return false;
             }
@@ -139,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 if (menuItem.getItemId() == R.id.red) {
                     drawingView.setColor(Color.RED);
+                    buttonPressed= 1;
                 } else if (menuItem.getItemId() == R.id.blue) {
                     drawingView.setColor(Color.BLUE);
                 }
@@ -225,60 +219,5 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-    }
-
-    private void alertDialogRect() {
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        LayoutInflater inflater = this.getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.rectangle_activity, null);
-        dialog.setView(dialogView);
-
-        final EditText width_et = (EditText) dialogView.findViewById(R.id.width_editText);
-        final EditText height_et = (EditText) dialogView.findViewById(R.id.height_editText);
-        final EditText x_et = (EditText) dialogView.findViewById(R.id.r_x_editText);
-        final EditText y_et = (EditText) dialogView.findViewById(R.id.r_y_editText);
-        final TextView tv = (TextView) dialogView.findViewById(R.id.error_textView);
-
-        dialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-                if(!width_et.getText().equals("") && !height_et.getText().equals("") && !x_et.getText().equals("") && !y_et.getText().equals("")) {
-                    Log.i("LOCATION", "In if statement");
-                    rectWidth = Integer.parseInt(width_et.getText().toString());
-                    rectHeight = Integer.parseInt(height_et.getText().toString());
-                    x = Integer.parseInt(x_et.getText().toString());
-                    y = Integer.parseInt(y_et.getText().toString());
-
-                    numbersSet = 1;
-                } else {
-                    String msg = "Please make sure all fields are filled in.";
-                    tv.setText(msg);
-                }
-
-                Log.i("NUMBERS", "Rectangle Details: W= " + rectWidth + " H= " + rectHeight + " X=" + x + " Y=" + y);
-                Toast.makeText(getApplicationContext(), "Rectangle Created", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        AlertDialog alertDialog = dialog.create();
-        alertDialog.show();
-    }
-
-    private void alertDialogCircle() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        LayoutInflater inflater = this.getLayoutInflater();
-        dialog.setView(inflater.inflate(R.layout.circle_activity, null));
-
-        dialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-                Toast.makeText(getApplicationContext(), "Rectangle Created", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        AlertDialog alertDialog = dialog.create();
-        alertDialog.show();
     }
 }

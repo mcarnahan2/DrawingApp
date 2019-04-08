@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -14,7 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import static edu.apsu.drawingapp.MainActivity.backgroundColor;
-import static edu.apsu.drawingapp.MainActivity.numbersSet;
+import static edu.apsu.drawingapp.MainActivity.buttonPressed;
 
 public class DrawingView extends View {
     Paint backgroundPaint;
@@ -37,6 +38,18 @@ public class DrawingView extends View {
     private Canvas canvas;
     private Canvas cacheCanvas;
     private Bitmap cacheBitmap;
+
+    float rBeginX;
+    float rEndX;
+    float rBeginY;
+    float rEndY;
+    private RectF rect;
+
+    float cBeginX;
+    float cEndX;
+    float cBeginY;
+    float cEndY;
+    private RectF circ;
 
     public DrawingView(Context context) {
         super(context);
@@ -62,6 +75,10 @@ public class DrawingView extends View {
         rectanglePaint.setColor(Color.BLACK);
         rectanglePaint.setStyle(Paint.Style.FILL);
 
+        circlePaint = new Paint();
+        circlePaint.setColor(Color.BLACK);
+        circlePaint.setStyle(Paint.Style.FILL);
+
     }
 
     private void updatePaint() {
@@ -86,10 +103,6 @@ public class DrawingView extends View {
         } else {
             canvas.drawPaint(backgroundPaint);
         }
-
-        if(MainActivity.numbersSet == 1){
-            canvas.drawRect(MainActivity.rectWidth, MainActivity.rectHeight, MainActivity.rectWidth, MainActivity.rectHeight, rectanglePaint);
-        }
     }
 
     @Override
@@ -105,17 +118,40 @@ public class DrawingView extends View {
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 path.moveTo(event.getX(), event.getY());
+
                 pX = event.getX();
                 pY = event.getY();
+
+                if(buttonPressed==2){
+                    rBeginX=pX;
+                    rBeginY=pY;
+                } else if(buttonPressed ==3){
+                    cBeginX=pX;
+                    cBeginY=pY;
+                }
                 break;
             case MotionEvent.ACTION_MOVE:
-                path.quadTo(pX, pY,event.getX(), event.getY());
+                if(buttonPressed==1) {
+                    path.quadTo(pX, pY, event.getX(), event.getY());
+                }
                 pX = event.getX();
                 pY = event.getY();
                 break;
             case MotionEvent.ACTION_UP:
-                cacheCanvas.drawPath(path, paint);
-                path.reset();
+                if(buttonPressed==1) {
+                    cacheCanvas.drawPath(path, paint);
+                    path.reset();
+                } else if(buttonPressed==2) {
+                    rEndX = event.getX();
+                    rEndY = event.getY();
+                    rect = new RectF(rBeginX, rBeginY, rEndX, rEndY);
+                    cacheCanvas.drawRect(rect, rectanglePaint);
+                } else if(buttonPressed==3){
+                    cEndX =event.getX();
+                    cEndY = event.getY();
+                    circ = new RectF(cBeginX, cBeginY, cEndX, cEndY);
+                    cacheCanvas.drawOval(circ, circlePaint);
+                }
                 break;
         }
         invalidate();
@@ -158,4 +194,6 @@ public class DrawingView extends View {
         }
         invalidate();
     }
+
+
 }
