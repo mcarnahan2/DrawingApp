@@ -15,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,8 +44,11 @@ public class MainActivity extends AppCompatActivity {
     TextView textTargetUri;
     public static Bitmap bitmap;
     public static int backgroundColor = 0;
-    public static int x;
-    public static int y;
+    public static int x=0;
+    public static int y=0;
+    public static int rectWidth=0;
+    public static int rectHeight=0;
+    public static int radius=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +69,23 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 if (menuItem.getItemId() == R.id.rect) {
                     textTargetUri.setText("Rectangle");
+
                     alertDialogRect();
+
+                    EditText width_et = findViewById(R.id.width_editText);
+                    EditText height_et = findViewById(R.id.height_editText);
+                    EditText x_et = findViewById(R.id.r_x_editText);
+                    EditText y_et = findViewById(R.id.r_y_editText);
+
+
+                    if(width_et != null && height_et != null && x_et != null && y_et != null) {
+                        rectWidth = Integer.parseInt(width_et.getText().toString());
+                        rectHeight = Integer.parseInt(height_et.getText().toString());
+                        x = Integer.parseInt(x_et.getText().toString());
+                        y = Integer.parseInt(y_et.getText().toString());
+
+                        Log.i("NUMBERS", "Rectangle Details: W= " + rectWidth + " H= " + rectHeight + " X=" + x + " Y=" + y);
+                    }
                 } else if (menuItem.getItemId() == R.id.circle) {
                     textTargetUri.setText("Circle");
                     alertDialogCircle();
@@ -145,10 +165,38 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ImageButton fillButton = findViewById(R.id.fill_imageButton6);
+        final PopupMenu popupMenuBG = new PopupMenu(getApplicationContext(), fillButton);
+        final Menu menuBG = popupMenuBG.getMenu();
+        popupMenuBG.getMenuInflater().inflate(R.menu.bg_color_menu, menuBG );
+
+        popupMenuBG.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                if (menuItem.getItemId() == R.id.red) {
+                    drawingView.setBackgroundColor(Color.RED);
+                } else if (menuItem.getItemId() == R.id.orange) {
+                    drawingView.setBackgroundColor(getResources().getColor(R.color.orange));
+                } else if(menuItem.getItemId() == R.id.yellow){
+                    drawingView.setBackgroundColor(Color.YELLOW);
+                } else if(menuItem.getItemId() == R.id.green){
+                    drawingView.setBackgroundColor(Color.GREEN);
+                } else if(menuItem.getItemId() == R.id.blue){
+                    drawingView.setBackgroundColor(Color.BLUE);
+                } else if(menuItem.getItemId() == R.id.purple){
+                    drawingView.setBackgroundColor(getResources().getColor(R.color.purple));
+                } else if(menuItem.getItemId() == R.id.black){
+                    drawingView.setBackgroundColor(Color.BLACK);
+                } else if(menuItem.getItemId() == R.id.white){
+                    drawingView.setBackgroundColor(Color.WHITE);
+                }
+                return false;
+            }
+        });
+
         fillButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                drawingView.setBackgroundColor(Color.RED);
+                popupMenuBG.show();
             }
         });
 
