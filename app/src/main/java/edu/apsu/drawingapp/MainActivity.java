@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     public static int rectWidth=0;
     public static int rectHeight=0;
     public static int radius=0;
+    public static int numbersSet=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,23 +70,10 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 if (menuItem.getItemId() == R.id.rect) {
                     textTargetUri.setText("Rectangle");
+                    Log.i("NUMBERS", "Rectangle Details: W= " + rectWidth + " H= " + rectHeight + " X=" + x + " Y=" + y);
 
                     alertDialogRect();
 
-                    EditText width_et = findViewById(R.id.width_editText);
-                    EditText height_et = findViewById(R.id.height_editText);
-                    EditText x_et = findViewById(R.id.r_x_editText);
-                    EditText y_et = findViewById(R.id.r_y_editText);
-
-
-                    if(width_et != null && height_et != null && x_et != null && y_et != null) {
-                        rectWidth = Integer.parseInt(width_et.getText().toString());
-                        rectHeight = Integer.parseInt(height_et.getText().toString());
-                        x = Integer.parseInt(x_et.getText().toString());
-                        y = Integer.parseInt(y_et.getText().toString());
-
-                        Log.i("NUMBERS", "Rectangle Details: W= " + rectWidth + " H= " + rectHeight + " X=" + x + " Y=" + y);
-                    }
                 } else if (menuItem.getItemId() == R.id.circle) {
                     textTargetUri.setText("Circle");
                     alertDialogCircle();
@@ -240,9 +228,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void alertDialogRect() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
-        dialog.setView(inflater.inflate(R.layout.rectangle_activity, null));
+        View dialogView = inflater.inflate(R.layout.rectangle_activity, null);
+        dialog.setView(dialogView);
+
+        final EditText width_et = (EditText) dialogView.findViewById(R.id.width_editText);
+        final EditText height_et = (EditText) dialogView.findViewById(R.id.height_editText);
+        final EditText x_et = (EditText) dialogView.findViewById(R.id.r_x_editText);
+        final EditText y_et = (EditText) dialogView.findViewById(R.id.r_y_editText);
+        final TextView tv = (TextView) dialogView.findViewById(R.id.error_textView);
+
+        dialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                if(!width_et.getText().equals("") && !height_et.getText().equals("") && !x_et.getText().equals("") && !y_et.getText().equals("")) {
+                    Log.i("LOCATION", "In if statement");
+                    rectWidth = Integer.parseInt(width_et.getText().toString());
+                    rectHeight = Integer.parseInt(height_et.getText().toString());
+                    x = Integer.parseInt(x_et.getText().toString());
+                    y = Integer.parseInt(y_et.getText().toString());
+
+                    numbersSet = 1;
+                } else {
+                    String msg = "Please make sure all fields are filled in.";
+                    tv.setText(msg);
+                }
+
+                Log.i("NUMBERS", "Rectangle Details: W= " + rectWidth + " H= " + rectHeight + " X=" + x + " Y=" + y);
+                Toast.makeText(getApplicationContext(), "Rectangle Created", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         AlertDialog alertDialog = dialog.create();
         alertDialog.show();
@@ -252,6 +269,14 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         dialog.setView(inflater.inflate(R.layout.circle_activity, null));
+
+        dialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                Toast.makeText(getApplicationContext(), "Rectangle Created", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         AlertDialog alertDialog = dialog.create();
         alertDialog.show();

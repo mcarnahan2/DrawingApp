@@ -14,9 +14,12 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import static edu.apsu.drawingapp.MainActivity.backgroundColor;
+import static edu.apsu.drawingapp.MainActivity.numbersSet;
 
 public class DrawingView extends View {
     Paint backgroundPaint;
+    Paint rectanglePaint;
+    Paint circlePaint;
     private Paint paint;
     private Paint BitmapPaint;
     private Path path;
@@ -55,6 +58,10 @@ public class DrawingView extends View {
         BitmapPaint = new Paint();
         updatePaint();
 
+        rectanglePaint = new Paint();
+        rectanglePaint.setColor(Color.BLACK);
+        rectanglePaint.setStyle(Paint.Style.FILL);
+
     }
 
     private void updatePaint() {
@@ -78,6 +85,10 @@ public class DrawingView extends View {
             MainActivity.backgroundColor = 0;
         } else {
             canvas.drawPaint(backgroundPaint);
+        }
+
+        if(MainActivity.numbersSet == 1){
+            canvas.drawRect(MainActivity.rectWidth, MainActivity.rectHeight, MainActivity.rectWidth, MainActivity.rectHeight, rectanglePaint);
         }
     }
 
