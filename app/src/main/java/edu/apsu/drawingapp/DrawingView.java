@@ -8,9 +8,9 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -21,6 +21,7 @@ public class DrawingView extends View {
     Paint backgroundPaint;
     Paint rectanglePaint;
     Paint circlePaint;
+    Paint textPaint;
     private Paint paint;
     private Paint BitmapPaint;
     private Path path;
@@ -51,6 +52,9 @@ public class DrawingView extends View {
     float cEndY;
     private RectF circ;
 
+    float tBeginX;
+    float tBeginY;
+
     public DrawingView(Context context) {
         super(context);
     }
@@ -79,6 +83,18 @@ public class DrawingView extends View {
         circlePaint.setColor(Color.BLACK);
         circlePaint.setStyle(Paint.Style.FILL);
 
+        textPaint = new Paint();
+        textPaint.setColor(Color.BLACK);
+        textPaint.setStyle(Paint.Style.FILL);
+
+        textPaint.setAntiAlias(true);
+        textPaint.setTextAlign(Paint.Align.LEFT);
+
+        float spSize = 30; //30 sp
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        float pixelSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spSize, dm);
+
+        textPaint.setTextSize(pixelSize);
     }
 
     private void updatePaint() {
@@ -151,6 +167,10 @@ public class DrawingView extends View {
                     cEndY = event.getY();
                     circ = new RectF(cBeginX, cBeginY, cEndX, cEndY);
                     cacheCanvas.drawOval(circ, circlePaint);
+                } else if(buttonPressed==4){
+                    tBeginX = event.getX();
+                    tBeginY = event.getY();
+                    cacheCanvas.drawText(MainActivity.text, tBeginX, tBeginY, textPaint);
                 }
                 break;
         }

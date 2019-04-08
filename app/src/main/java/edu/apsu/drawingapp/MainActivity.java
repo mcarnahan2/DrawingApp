@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     public static Bitmap bitmap;
     public static int backgroundColor = 0;
     public static int buttonPressed=0;
+    public static String text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +147,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ImageButton textButton = findViewById(R.id.text_imageButton4);
+        textButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog();
+            }
+        });
+
         ImageButton fillButton = findViewById(R.id.fill_imageButton6);
         final PopupMenu popupMenuBG = new PopupMenu(getApplicationContext(), fillButton);
         final Menu menuBG = popupMenuBG.getMenu();
@@ -219,5 +228,27 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void alertDialog(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+
+        dialog.setTitle("Enter Text");
+        dialog.setMessage("Please enter some text:");
+
+        final EditText et = new EditText(this);
+        dialog.setView(et);
+
+        dialog.setPositiveButton("Place text", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                text = et.getText().toString();
+                Log.i("TEXT", "text is :" + text);
+                buttonPressed=4;
+            }
+        });
+
+        AlertDialog alertDialog = dialog.create();
+        alertDialog.show();
     }
 }
