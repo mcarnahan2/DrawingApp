@@ -139,8 +139,20 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 if (menuItem.getItemId() == R.id.red) {
                     drawingView.setColor(Color.RED);
-                } else if (menuItem.getItemId() == R.id.blue) {
+                } else if (menuItem.getItemId() == R.id.orange) {
+                    //      drawingView.setBackgroundColor(getResources().getColor(R.color.orange));
+                } else if(menuItem.getItemId() == R.id.yellow){
+                    drawingView.setColor(Color.YELLOW);
+                } else if(menuItem.getItemId() == R.id.green){
+                    drawingView.setColor(Color.GREEN);
+                } else if(menuItem.getItemId() == R.id.blue){
                     drawingView.setColor(Color.BLUE);
+                } else if(menuItem.getItemId() == R.id.purple){
+                    //     drawingView.setBackgroundColor(getResources().getColor(R.color.purple));
+                } else if(menuItem.getItemId() == R.id.black){
+                    drawingView.setColor(Color.BLACK);
+                } else if(menuItem.getItemId() == R.id.white){
+                    drawingView.setColor(Color.WHITE);
                 }
                 return false;
             }
@@ -163,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
                 if (menuItem.getItemId() == R.id.red) {
                     drawingView.setBackgroundColor(Color.RED);
                 } else if (menuItem.getItemId() == R.id.orange) {
-                    drawingView.setBackgroundColor(getResources().getColor(R.color.orange));
+              //      drawingView.setBackgroundColor(getResources().getColor(R.color.orange));
                 } else if(menuItem.getItemId() == R.id.yellow){
                     drawingView.setBackgroundColor(Color.YELLOW);
                 } else if(menuItem.getItemId() == R.id.green){
@@ -171,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if(menuItem.getItemId() == R.id.blue){
                     drawingView.setBackgroundColor(Color.BLUE);
                 } else if(menuItem.getItemId() == R.id.purple){
-                    drawingView.setBackgroundColor(getResources().getColor(R.color.purple));
+               //     drawingView.setBackgroundColor(getResources().getColor(R.color.purple));
                 } else if(menuItem.getItemId() == R.id.black){
                     drawingView.setBackgroundColor(Color.BLACK);
                 } else if(menuItem.getItemId() == R.id.white){
@@ -198,13 +210,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*Button clearButton = findViewById(R.id.clear_button);
+        Button clearButton = findViewById(R.id.clear_button);
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 drawingView.clearScreen();
+                Log.i("CLEAR", "clear screen");
             }
-        });*/
+        });
 
     }
 

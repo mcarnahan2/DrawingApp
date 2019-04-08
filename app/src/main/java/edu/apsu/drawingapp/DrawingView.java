@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -38,6 +39,8 @@ public class DrawingView extends View {
     private Canvas cacheCanvas;
     private Bitmap cacheBitmap;
 
+    public boolean clearScreen = false;
+
     public DrawingView(Context context) {
         super(context);
     }
@@ -49,8 +52,8 @@ public class DrawingView extends View {
 
     private void init() {
         backgroundPaint = new Paint();
-        backgroundPaint.setColor(Color.RED);
-        backgroundPaint.setStyle(Paint.Style.FILL);
+       // backgroundPaint.setColor(Color.RED);
+        //backgroundPaint.setStyle(Paint.Style.FILL);
         cacheBitmap = Bitmap.createBitmap(currentWidth, currentHeight, Bitmap.Config.ARGB_8888);
         cacheCanvas = new Canvas(cacheBitmap);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -90,6 +93,15 @@ public class DrawingView extends View {
         if(MainActivity.numbersSet == 1){
             canvas.drawRect(MainActivity.rectWidth, MainActivity.rectHeight, MainActivity.rectWidth, MainActivity.rectHeight, rectanglePaint);
         }
+
+        if (clearScreen) {
+            backgroundPaint.setColor(Color.WHITE);
+            canvas.drawRect(new Rect(0, 0, currentWidth, currentHeight), backgroundPaint);
+            cacheCanvas.drawRect(new Rect(0, 0, currentWidth, currentHeight), backgroundPaint);
+            cacheBitmap = Bitmap.createBitmap(currentWidth, currentHeight, Bitmap.Config.ARGB_8888);
+            clearScreen = false;
+        }
+
     }
 
     @Override
@@ -150,12 +162,7 @@ public class DrawingView extends View {
     }
 
     public void clearScreen() {
-        if(canvas != null){
-            Paint backPaint = new Paint();
-            backPaint.setColor(Color.WHITE);
-            canvas.drawRect(new Rect(0, 0, currentWidth, currentHeight), backPaint);
-            cacheCanvas.drawRect(new Rect(0, 0, currentWidth, currentHeight), backPaint);
-        }
+        clearScreen = true;
         invalidate();
     }
 }
