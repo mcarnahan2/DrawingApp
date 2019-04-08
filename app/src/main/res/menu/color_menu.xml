@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/red"
-        android:icon="@drawable/red"
-        android:title="red" />
-    <item android:id="@+id/blue"
-        android:icon="@drawable/blue"
-        android:title="blue" />
+    <item
+        android:id="@+id/red"
+        android:title="Red" />
+    <item
+        android:id="@+id/orange"
+        android:title="Orange" />
+    <item
+        android:id="@+id/yellow"
+        android:title="Yellow" />
+    <item
+        android:id="@+id/green"
+        android:title="Green" />
+    <item
+        android:id="@+id/blue"
+        android:title="Blue" />
+    <item
+        android:id="@+id/purple"
+        android:title="Purple" />
+    <item
+        android:id="@+id/black"
+        android:title="Black" />
+    <item
+        android:id="@+id/white"
+        android:title="White" />
 </menu>

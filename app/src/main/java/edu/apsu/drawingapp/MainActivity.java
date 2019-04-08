@@ -44,8 +44,12 @@ public class MainActivity extends AppCompatActivity {
     TextView textTargetUri;
     public static Bitmap bitmap;
     public static int backgroundColor = 0;
-    public static int buttonPressed=0;
-    public static String text;
+    public static int x=0;
+    public static int y=0;
+    public static int rectWidth=0;
+    public static int rectHeight=0;
+    public static int radius=0;
+    public static int numbersSet=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +70,13 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 if (menuItem.getItemId() == R.id.rect) {
                     textTargetUri.setText("Rectangle");
-                    buttonPressed=2;
+                    Log.i("NUMBERS", "Rectangle Details: W= " + rectWidth + " H= " + rectHeight + " X=" + x + " Y=" + y);
+
+                    alertDialogRect();
 
                 } else if (menuItem.getItemId() == R.id.circle) {
                     textTargetUri.setText("Circle");
-                    buttonPressed=3;
+                    alertDialogCircle();
                 }
                 return false;
             }
@@ -133,9 +139,20 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 if (menuItem.getItemId() == R.id.red) {
                     drawingView.setColor(Color.RED);
-                    buttonPressed= 1;
-                } else if (menuItem.getItemId() == R.id.blue) {
+                } else if (menuItem.getItemId() == R.id.orange) {
+                    //      drawingView.setBackgroundColor(getResources().getColor(R.color.orange));
+                } else if(menuItem.getItemId() == R.id.yellow){
+                    drawingView.setColor(Color.YELLOW);
+                } else if(menuItem.getItemId() == R.id.green){
+                    drawingView.setColor(Color.GREEN);
+                } else if(menuItem.getItemId() == R.id.blue){
                     drawingView.setColor(Color.BLUE);
+                } else if(menuItem.getItemId() == R.id.purple){
+                    //     drawingView.setBackgroundColor(getResources().getColor(R.color.purple));
+                } else if(menuItem.getItemId() == R.id.black){
+                    drawingView.setColor(Color.BLACK);
+                } else if(menuItem.getItemId() == R.id.white){
+                    drawingView.setColor(Color.WHITE);
                 }
                 return false;
             }
@@ -144,14 +161,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 popupMenu.show();
-            }
-        });
-
-        ImageButton textButton = findViewById(R.id.text_imageButton4);
-        textButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialog();
             }
         });
 
@@ -166,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
                 if (menuItem.getItemId() == R.id.red) {
                     drawingView.setBackgroundColor(Color.RED);
                 } else if (menuItem.getItemId() == R.id.orange) {
-                    drawingView.setBackgroundColor(getResources().getColor(R.color.orange));
+              //      drawingView.setBackgroundColor(getResources().getColor(R.color.orange));
                 } else if(menuItem.getItemId() == R.id.yellow){
                     drawingView.setBackgroundColor(Color.YELLOW);
                 } else if(menuItem.getItemId() == R.id.green){
@@ -174,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if(menuItem.getItemId() == R.id.blue){
                     drawingView.setBackgroundColor(Color.BLUE);
                 } else if(menuItem.getItemId() == R.id.purple){
-                    drawingView.setBackgroundColor(getResources().getColor(R.color.purple));
+               //     drawingView.setBackgroundColor(getResources().getColor(R.color.purple));
                 } else if(menuItem.getItemId() == R.id.black){
                     drawingView.setBackgroundColor(Color.BLACK);
                 } else if(menuItem.getItemId() == R.id.white){
@@ -201,13 +210,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*Button clearButton = findViewById(R.id.clear_button);
+        Button clearButton = findViewById(R.id.clear_button);
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 drawingView.clearScreen();
+                Log.i("CLEAR", "clear screen");
             }
-        });*/
+        });
 
     }
 
@@ -230,21 +240,54 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void alertDialog(){
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+    private void alertDialogRect() {
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.rectangle_activity, null);
+        dialog.setView(dialogView);
 
-        dialog.setTitle("Enter Text");
-        dialog.setMessage("Please enter some text:");
+        final EditText width_et = (EditText) dialogView.findViewById(R.id.width_editText);
+        final EditText height_et = (EditText) dialogView.findViewById(R.id.height_editText);
+        final EditText x_et = (EditText) dialogView.findViewById(R.id.r_x_editText);
+        final EditText y_et = (EditText) dialogView.findViewById(R.id.r_y_editText);
+        final TextView tv = (TextView) dialogView.findViewById(R.id.error_textView);
 
-        final EditText et = new EditText(this);
-        dialog.setView(et);
-
-        dialog.setPositiveButton("Place text", new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                text = et.getText().toString();
-                Log.i("TEXT", "text is :" + text);
-                buttonPressed=4;
+
+                if(!width_et.getText().equals("") && !height_et.getText().equals("") && !x_et.getText().equals("") && !y_et.getText().equals("")) {
+                    Log.i("LOCATION", "In if statement");
+                    rectWidth = Integer.parseInt(width_et.getText().toString());
+                    rectHeight = Integer.parseInt(height_et.getText().toString());
+                    x = Integer.parseInt(x_et.getText().toString());
+                    y = Integer.parseInt(y_et.getText().toString());
+
+                    numbersSet = 1;
+                } else {
+                    String msg = "Please make sure all fields are filled in.";
+                    tv.setText(msg);
+                }
+
+                Log.i("NUMBERS", "Rectangle Details: W= " + rectWidth + " H= " + rectHeight + " X=" + x + " Y=" + y);
+                Toast.makeText(getApplicationContext(), "Rectangle Created", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        AlertDialog alertDialog = dialog.create();
+        alertDialog.show();
+    }
+
+    private void alertDialogCircle() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        dialog.setView(inflater.inflate(R.layout.circle_activity, null));
+
+        dialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                Toast.makeText(getApplicationContext(), "Rectangle Created", Toast.LENGTH_SHORT).show();
             }
         });
 
