@@ -49,26 +49,19 @@
         app:srcCompat="@drawable/circle" />
 
     <ImageButton
-        android:id="@+id/fill_imageButton"
-        android:layout_width="74dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shape_imageButton"
-        app:srcCompat="@drawable/fillbucket" />
-
-    <ImageButton
         android:id="@+id/color_imageButton3"
         android:layout_width="74dp"
         android:layout_height="55dp"
+        app:layout_constraintEnd_toStartOf="@+id/picture_button"
         app:layout_constraintStart_toEndOf="@+id/shape_imageButton"
         app:layout_constraintTop_toBottomOf="@+id/drawingView"
-        app:srcCompat="@drawable/color" />
+        app:srcCompat="@drawable/paintbrush" />
 
     <ImageButton
         android:id="@+id/text_imageButton4"
         android:layout_width="74dp"
         android:layout_height="55dp"
+        app:layout_constraintEnd_toStartOf="@+id/eraser_imageButton5"
         app:layout_constraintStart_toEndOf="@+id/picture_button"
         app:layout_constraintTop_toBottomOf="@+id/drawingView"
         app:srcCompat="@drawable/text" />
@@ -79,7 +72,6 @@
         android:layout_height="55dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/text_imageButton4"
         app:layout_constraintTop_toBottomOf="@+id/drawingView"
         app:srcCompat="@drawable/eraser" />
 
@@ -87,32 +79,37 @@
         android:id="@+id/fill_imageButton6"
         android:layout_width="74dp"
         android:layout_height="55dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shape_imageButton"
+        android:layout_marginEnd="90dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_imageButton4"
         app:srcCompat="@drawable/fillbucket" />
 
-    <Button
+    <ImageButton
         android:id="@+id/picture_button"
         android:layout_width="74dp"
         android:layout_height="55dp"
         android:text="Picture"
+        app:layout_constraintEnd_toStartOf="@+id/text_imageButton4"
         app:layout_constraintStart_toEndOf="@+id/color_imageButton3"
-        app:layout_constraintTop_toBottomOf="@+id/drawingView" />
+        app:layout_constraintTop_toBottomOf="@+id/drawingView"
+        app:srcCompat="@drawable/image" />
 
-    <Button
+    <ImageButton
         android:id="@+id/save_button"
         android:layout_width="74dp"
         android:layout_height="55dp"
+        android:layout_marginStart="90dp"
         android:text="Save"
-        app:layout_constraintStart_toEndOf="@+id/fill_imageButton"
-        app:layout_constraintTop_toBottomOf="@+id/color_imageButton3" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/color_imageButton3"
+        app:srcCompat="@drawable/save" />
 
     <Button
         android:id="@+id/clear_button"
         android:layout_width="74dp"
         android:layout_height="55dp"
         android:text="Clear"
+        app:layout_constraintEnd_toStartOf="@+id/fill_imageButton6"
         app:layout_constraintStart_toEndOf="@+id/save_button"
         app:layout_constraintTop_toBottomOf="@+id/picture_button" />
 

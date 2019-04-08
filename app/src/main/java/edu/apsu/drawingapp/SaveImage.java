@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 public class SaveImage {
-    private static final File rootDir = new File(Environment.getExternalStorageDirectory()+File.separator+"huaban/");
+     private static final File rootDir = new File(Environment.getExternalStorageDirectory()+File.separator+"huaban/");
 
     /** Save picture to file */
     public static boolean saveScreen(View view){
@@ -18,7 +18,7 @@ public class SaveImage {
             return false;
         }
         if(!rootDir.exists()){
-            rootDir.mkdirs();
+            rootDir.mkdir();
         }
         view.setDrawingCacheEnabled(true);
         view.buildDrawingCache();
@@ -35,4 +35,7 @@ public class SaveImage {
             bitmap = null;
         }
     }
+
+
 }
+

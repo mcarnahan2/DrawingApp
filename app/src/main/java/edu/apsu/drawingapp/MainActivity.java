@@ -1,6 +1,7 @@
 package edu.apsu.drawingapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -31,7 +33,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -101,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        Button pictureButton = findViewById(R.id.picture_button);
+        ImageButton pictureButton = findViewById(R.id.picture_button);
         pictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,16 +114,62 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button saveButton = findViewById(R.id.save_button);
+        ImageButton saveButton = findViewById(R.id.save_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (SaveImage.saveScreen(drawingView)) {
-                    Toast.makeText(getApplicationContext(), "Save Succesful", Toast.LENGTH_SHORT);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Save Failed", Toast.LENGTH_SHORT);
+                Bitmap bitmap = drawingView.getDrawingCache();
 
-                }
+                /*
+                    public static final String insertImage (ContentResolver cr, Bitmap source,
+                    String title, String description)
+
+                        Insert an image and create a thumbnail for it.
+
+                    Parameters
+                        cr : The content resolver to use
+                        source : The stream to use for the image
+                        title : The name of the image
+                        description : The description of the image
+
+                    Returns
+                        The URL to the newly created image, or null if the image
+                        failed to be stored for any reason.
+                */
+
+                // Save image to gallery
+                String savedImageURL = MediaStore.Images.Media.insertImage(
+                        getContentResolver(),
+                        bitmap, "", ""
+                );
+
+                // Parse the gallery image url to uri
+                Uri savedImageURI = Uri.parse(savedImageURL);
+                getApplicationContext().grantUriPermission("edu.apsu.drawingapp",
+                        savedImageURI, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+                // Display the saved image to ImageView
+               // drawingView.setImageURI(savedImageURI);
+
+                // Display saved image url to TextView
+                textTargetUri.setText("Image saved to gallery." + savedImageURL);
+               /* try {
+                    drawingView.setDrawingCacheEnabled(true);
+                    Bitmap bitmap = drawingView.getDrawingCache();
+                    File f = null;
+                    if(Environment.getExternalStorageDirectory().equals(Environment.MEDIA_MOUNTED)){
+                        File file = new File(Environment.getExternalStorageDirectory(),"Gallery");
+                        if(!file.exists()){
+                            file.mkdirs();
+                        }
+                        f = new File(file.getAbsolutePath()+file.separator+ "filename"+".jpg");
+                    }
+                    FileOutputStream os = new FileOutputStream(f);
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 10, os);
+                    os.close();
+                } catch(Exception e){
+                    e.printStackTrace();
+                } */
             }
         });
 
@@ -136,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                     drawingView.setColor(Color.RED);
                     buttonPressed=1;
                 } else if (menuItem.getItemId() == R.id.orange) {
-                    drawingView.setColor(getResources().getColor(R.color.orange));
+                 //   drawingView.setColor(getResources().getColor(R.color.orange));
                     buttonPressed=1;
                 } else if(menuItem.getItemId() == R.id.yellow){
                     drawingView.setColor(Color.YELLOW);
@@ -148,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                     drawingView.setColor(Color.BLUE);
                     buttonPressed=1;
                 } else if(menuItem.getItemId() == R.id.purple){
-                    drawingView.setColor(getResources().getColor(R.color.purple));
+                 //   drawingView.setColor(getResources().getColor(R.color.purple));
                     buttonPressed=1;
                 } else if(menuItem.getItemId() == R.id.black){
                     drawingView.setColor(Color.BLACK);

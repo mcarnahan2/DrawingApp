@@ -125,6 +125,7 @@ public class DrawingView extends View {
             canvas.drawPaint(backgroundPaint);
         }
 
+
         if (clearScreen) {
             backgroundPaint.setColor(Color.WHITE);
             canvas.drawRect(new Rect(0, 0, currentWidth, currentHeight), backgroundPaint);
@@ -132,7 +133,6 @@ public class DrawingView extends View {
             cacheBitmap = Bitmap.createBitmap(currentWidth, currentHeight, Bitmap.Config.ARGB_8888);
             clearScreen = false;
         }
-
     }
 
     @Override
